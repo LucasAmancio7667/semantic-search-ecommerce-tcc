@@ -1,8 +1,7 @@
 # Estado da Arte — Trabalhos Relacionados
 
 Tabela de classificação dos trabalhos relacionados ao TCC "Otimização de Busca Semântica
-em E-commerce com Geração de Dados Sintéticos". Cada linha é revisada e validada por
-leitura completa do trabalho antes de ser considerada final.
+em E-commerce com Geração de Dados Sintéticos".
 
 ## Critérios de busca
 
