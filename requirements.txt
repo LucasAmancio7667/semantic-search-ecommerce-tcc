@@ -1,2 +1,5 @@
 requests
 huggingface_hub
+pandas
+elasticsearch
+scikit-learn
