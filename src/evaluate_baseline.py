@@ -1,22 +1,8 @@
-import math
 import pandas as pd
+from sklearn.metrics import ndcg_score
 from src.search import search
 
 KS = [5, 10, 15, 25, 50]
-
-
-def dcg_at_k(relevancias, k):
-    return sum(rel / math.log2(i + 1) for i, rel in enumerate(relevancias[:k], start=1))
-
-
-def ndcg_at_k(y_true, y_score, k):
-    ordenado = sorted(zip(y_score, y_true), reverse=True)
-    relevancias_no_ranking = [rel for _, rel in ordenado]
-
-    dcg = dcg_at_k(relevancias_no_ranking, k)
-    idcg = dcg_at_k(sorted(y_true, reverse=True), k)
-
-    return dcg / idcg if idcg > 0 else 0.0
 
 
 def evaluate_baseline():
@@ -39,7 +25,7 @@ def evaluate_baseline():
         y_score = [r["_score"] for r in resultados]
 
         for k in KS:
-            scores_por_k[k].append(ndcg_at_k(y_true, y_score, k))
+            scores_por_k[k].append(ndcg_score([y_true], [y_score], k=k))
 
     return {k: sum(scores) / len(scores) for k, scores in scores_por_k.items()}
 
