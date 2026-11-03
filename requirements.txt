@@ -4,3 +4,4 @@ pandas
 elasticsearch
 scikit-learn
 sentence-transformers
+pyarrow

@@ -45,3 +45,53 @@ usando os quatro modelos oficiais da família SBERT `all-*`.
   VM compartilhada)
 - Geração de queries sintéticas via LLMs/SLMs para fine-tuning dos embeddings (contribuição
   original do TCC)
+
+---
+
+# Resultados — Baseline BM25 vs. Reranking Semântico (Home Depot)
+
+Segundo dataset de validação, escolhido por ter uma escala semelhante ao WANDS
+(diferente do TREC, grande demais para a VM compartilhada no momento).
+
+## Metodologia
+
+- Dataset: Home Depot Product Search Relevance (54.667 produtos únicos, 11.795 queries)
+- Métrica: nDCG, calculado nos cortes K = 5, 10, 15, 25, 50
+- Relevância: contínua (1.0 a 3.0, média de pelo menos 3 avaliações humanas por par
+  query-produto) — diferente da relevância categórica (Exact/Partial/Irrelevant) do WANDS
+- Baseline lexical: BM25 padrão do Elasticsearch sobre os campos `title` + `description`
+- Baseline semântico: embedding de `title + description`, busca por similaridade de
+  cosseno (`knn`) no índice
+- Modelos avaliados até o momento: `all-MiniLM-L6-v2` (384 dims), `all-MiniLM-L12-v2` (384 dims)
+
+## Resultados
+
+| Modelo | nDCG@5 | nDCG@10 | nDCG@15 | nDCG@25 | nDCG@50 |
+|---|---|---|---|---|---|
+| BM25 (baseline lexical) | **0.2900** | **0.3373** | **0.3720** | **0.4121** | **0.4610** |
+| all-MiniLM-L6-v2 | 0.2548 | 0.2977 | 0.3293 | 0.3678 | 0.4148 |
+| all-MiniLM-L12-v2 | 0.2741 | 0.3184 | 0.3511 | 0.3898 | 0.4370 |
+
+## Discussão
+
+- Os valores absolutos de nDCG são bem mais baixos que no WANDS em todos os modelos —
+  consistente com o Home Depot ser um dataset mais ruidoso, com queries curtas e
+  coloquiais (termos de busca reais de usuários, nem sempre alinhados ao vocabulário do
+  título/descrição do produto).
+- Diferente do WANDS, aqui o BM25 supera os dois modelos semânticos testados até agora em
+  todos os cortes de nDCG — um resultado oposto ao observado no primeiro dataset, onde o
+  reranking semântico batia o BM25 desde o MiniLM-L6. Isso é um achado relevante para a
+  discussão do TCC: o ganho do reranking semântico sobre a recuperação lexical não é
+  universal, parece depender de características do domínio/dataset (vocabulário,
+  tamanho/estrutura das queries, ruído nos julgamentos de relevância).
+- Entre os dois modelos semânticos, o MiniLM-L12 superou o MiniLM-L6 em todos os cortes,
+  mantendo a mesma ordem relativa observada no WANDS.
+
+## Próximos passos
+
+- Avaliar `all-mpnet-base-v2` e `all-distilroberta-v1` no Home Depot para completar a
+  família `all-*` neste segundo dataset
+- Investigar por que o reranking semântico performa pior que o BM25 aqui (hipóteses:
+  queries muito curtas prejudicam a qualidade do embedding da query; ruído nos
+  julgamentos de relevância; vocabulário muito específico do domínio "home improvement"
+  pouco representado no pré-treino dos modelos `all-*`, que são de propósito geral)

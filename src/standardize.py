@@ -26,3 +26,16 @@ def standardize_trec():
                 "description": doc["text"],
                 "source": "trec",
             }
+
+
+def standardize_home_depot():
+    df = pd.read_parquet("data/raw/home_depot/data/train-00000-of-00001-9de242b7603049c1.parquet")
+    df = df.drop_duplicates(subset="entity_id").fillna("")
+
+    for _, row in df.iterrows():
+        yield {
+            "id": row["entity_id"],
+            "title": row["name"],
+            "description": row["description"],
+            "source": "home_depot",
+        }
