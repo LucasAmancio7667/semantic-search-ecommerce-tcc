@@ -41,8 +41,7 @@ usando os quatro modelos oficiais da família SBERT `all-*`.
 
 ## Próximos passos
 
-- Baseline BM25/semântico no dataset TREC Product Search (pendente de expansão de disco na
-  VM compartilhada)
+- Baseline BM25/semântico no dataset TREC Product Search 
 - Geração de queries sintéticas via LLMs/SLMs para fine-tuning dos embeddings (contribuição
   original do TCC)
 
