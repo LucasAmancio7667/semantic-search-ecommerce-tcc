@@ -4,8 +4,8 @@ from src.search_semantico import search_semantico
 
 KS = [5, 10, 15, 25, 50]
 
-MODELO_NOME = "all-MiniLM-L12-v2"
-CAMPO_EMBEDDING = "embedding_minilm12"
+MODELO_NOME = "all-distilroberta-v1"
+CAMPO_EMBEDDING = "embedding_distilroberta"
 
 
 def evaluate_baseline_semantico_home_depot():

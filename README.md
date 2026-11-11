@@ -24,7 +24,7 @@ via LLMs/SLMs para calibração futura dos modelos de embedding.
 | Dataset | Produtos | Queries | Status |
 |---|---|---|---|
 | [WANDS](https://github.com/wayfair/WANDS) (Wayfair) | 42.994 | ~480 | Baseline completo |
-| [Home Depot Product Search Relevance](https://huggingface.co/datasets/bstds/home_depot) | 54.667 | 11.795 | Baseline em andamento |
+| [Home Depot Product Search Relevance](https://huggingface.co/datasets/bstds/home_depot) | 54.667 | 11.795 | Baseline completo |
 | [TREC Product Search Track 2023](https://huggingface.co/datasets/trec-product-search/product-search-corpus) | 1.661.907 | — | Pendente (aguardando expansão de disco) |
 
 Resultados detalhados em [`docs/resultados-baseline.md`](docs/resultados-baseline.md).
