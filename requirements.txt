@@ -5,3 +5,5 @@ elasticsearch
 scikit-learn
 sentence-transformers
 pyarrow
+anthropic
+python-dotenv
