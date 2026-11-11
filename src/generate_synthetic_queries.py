@@ -40,6 +40,7 @@ def gerar_amostra_wands():
         resultados.append({
             "product_id": produto["product_id"],
             "title": produto["product_name"],
+            "description": produto["product_description"],
             "query_sintetica": query_sintetica,
         })
         print(f"{produto['product_name'][:50]:<50} -> {query_sintetica}")
