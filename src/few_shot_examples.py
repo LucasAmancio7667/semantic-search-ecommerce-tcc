@@ -68,7 +68,7 @@ FEW_SHOT_EXAMPLES = [
     },
 ]
 
-SYSTEM_PROMPT = """Você é um sistema que simula consultas de busca reais, feitas por clientes de \
+SYSTEM_PROMPT = """Você é um especialista que simula consultas de busca reais, feitas por clientes de \
 e-commerce, a partir da ficha de um produto. O objetivo é gerar dados sintéticos de \
 treino para um modelo de busca semântica (embedding fine-tuning).
 
